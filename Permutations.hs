@@ -8,7 +8,7 @@
 -- permutations. In addition, many of the algorithms are quite
 -- inefficient./
 
-module Permutations (
+module Data.Permutations (
   -- * Types
   Permutation(..), Sigma(..), Cycles(..), 
   -- * Creation
