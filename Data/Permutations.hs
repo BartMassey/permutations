@@ -1,16 +1,25 @@
 {-# LANGUAGE Rank2Types #-}
 -- Copyright © 2012 Bart Massey
 
--- | Basic permutation functions, as inspired by
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Data.Permutations
+-- Copyright   :  (c) 2012 Bart Massey
+-- License     :  BSD-style (see the file LICENSE)
+-- 
+-- Maintainer  :  bart.massey@gmail.com
+-- Stability   :  alpha
+-- Portability :  portable
+-- 
+-- Basic permutation functions, as inspired by
 -- <http://www.math.utah.edu/mathcircle/notes/permutations.pdf>.
 -- 
--- /These functions are really only believed to work on finite
+-- These functions are really only believed to work on finite
 -- permutations. In addition, many of the algorithms are quite
--- inefficient./
--- 
--- This work is available under a BSD-style license. Please
--- see the file @LICENSE@ in this distribution for license terms.
-module Math.Permutations (
+-- inefficient.
+-----------------------------------------------------------------------------
+
+module Data.Permutations (
   -- * Types
   Permutation(..), Sigma(..), Cycles(..), 
   -- * Creation
