@@ -29,11 +29,16 @@ module Data.Permutations (
   fromSigma, fromCycles, 
   -- * Conversion
   toSigma, toCycles,
+  -- * Extraction
+  sigmaN, cyclesN,
   -- * Special permutations
-  id, idN, inverseN
+  idN, inverseN,
+  -- * Parity
+  crossings, even, odd
   ) where
 
-import Prelude hiding (id)
+import Prelude hiding (id, even, odd)
+import qualified Prelude (even, odd)
 import Data.List
 import Data.Ord
 
@@ -148,3 +153,30 @@ idN n = fromSigma [1..n]
 inverseN :: Int -> (forall a . Permutation a) -> Permutation b
 inverseN n perm =
   fromSigma $ perm [1..n]
+
+-- | Return the 𝛔 representation of the finite permutation argument.
+sigmaN :: Int -> (forall a . Permutation a) -> Sigma
+sigmaN n perm = perm [1..n]
+
+-- | Return the cycle representation of the finite permutation argument.
+cyclesN :: Int -> (forall a . Permutation a) -> Cycles
+cyclesN n perm = toCycles $ sigmaN n perm
+
+-- | Compute the number of crossings in the string-graph representation
+-- of the given finite 𝛔 specification. This is the \"length\" function
+-- on permutations.
+crossings :: Num a => Sigma -> a
+crossings sigma =
+  -- This is ridiculously inefficient (O(n^3)) and could easily be replaced
+  -- with some simple fold (O(n^2)). But it does echo the definition,
+  -- so leave it for now.
+  sum [if (sigma !! i) > (sigma !! j) then 1 else 0 |
+       i <- [0..length sigma - 1], j <- [i+1..length sigma - 1]]
+
+-- | A permutation is even if its 'crossings' is even.
+even :: Sigma -> Bool
+even sigma = Prelude.even (crossings sigma :: Int)
+
+-- | A permutation is odd if its 'crossings' is odd.
+odd :: Sigma -> Bool
+odd sigma = Prelude.odd (crossings sigma :: Int)
