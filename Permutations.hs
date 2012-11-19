@@ -7,8 +7,10 @@
 -- /These functions are really only believed to work on finite
 -- permutations. In addition, many of the algorithms are quite
 -- inefficient./
-
-module Data.Permutations (
+-- 
+-- This work is available under a BSD-style license. Please
+-- see the file @LICENSE@ in this distribution for license terms.
+module Math.Permutations (
   -- * Types
   Permutation(..), Sigma(..), Cycles(..), 
   -- * Creation
